@@ -1,6 +1,8 @@
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.chat.Chat;
 import org.jivesoftware.smack.chat.ChatManager;
+import org.jivesoftware.smack.chat.ChatManagerListener;
+import org.jivesoftware.smack.chat.ChatMessageListener;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
@@ -60,7 +62,6 @@ public class XMPP {
         newChat = chatManager.createChat("admin@mms-virtualbox");
 
 
-
         try {
             newChat.sendMessage("Hello you");
         } catch (SmackException.NotConnectedException e) {
@@ -68,6 +69,28 @@ public class XMPP {
         }
 
     }
+
+    public void listenChat(){
+        ChatManager manager = ChatManager.getInstanceFor(this.connection);
+        manager.addChatListener(new ChatManagerListener() {
+
+            @Override
+            public void chatCreated(Chat chat, boolean createdLocally) {
+                System.out.println("Created chat");
+                chat.addMessageListener(new ChatMessageListener() {
+
+                    @Override
+                    public void processMessage(Chat chat, Message message) {
+                        System.out.println(message.getBody());
+
+                    }
+                });
+
+            }
+        });
+    }
+
+
 
     public void login(){
         try {

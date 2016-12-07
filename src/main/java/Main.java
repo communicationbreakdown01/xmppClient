@@ -10,11 +10,13 @@ public class Main {
         xmppSession.createConfig("test","test");
         xmppSession.connectMe();
         xmppSession.login();
-        xmppSession.sendMessage();
+        //xmppSession.sendMessage();
 
 
         while(true){
             xmppSession.sendMessage();
+            xmppSession.listenChat();
+
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
