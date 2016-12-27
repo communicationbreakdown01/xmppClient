@@ -19,5 +19,9 @@ dependencies {
     compile "org.igniterealtime.smack:smack-im:4.1.0"
     // Optional for XMPP extensions support
     compile "org.igniterealtime.smack:smack-extensions:4.1.0"
+    //Pi4J
+    compile group: 'com.pi4j', name: 'pi4j-core', version: '1.1'
+    compile group: 'com.pi4j', name: 'pi4j-gpio-extension', version: '1.1'
+
 }
 
